@@ -1,0 +1,10 @@
+<mat-card *ngIf="task$ | async as task">
+  <mat-card-header>
+    <div mat-card-avatar [ngClass]="task.getClass()"></div>
+    <mat-card-title>{{ task.getTitle() }}</mat-card-title>
+    <mat-card-subtitle>до {{ task.getTsExpires() | date: 'medium' }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ task.getDescription() }}</p>
+  </mat-card-content>
+</mat-card>

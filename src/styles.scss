@@ -1,0 +1,119 @@
+@use 'sass:map';
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$task-manager-light-theme-primary: mat-palette($mat-green);
+$task-manager-light-theme-accent: mat-palette($mat-orange, A200, A100, A400);
+$task-manager-dark-theme-primary: mat-palette($mat-orange);
+$task-manager-dark-theme-accent: mat-palette($mat-green, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$task-manager-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$task-manager-light-theme: mat-light-theme(
+  $task-manager-light-theme-primary,
+  $task-manager-light-theme-accent,
+  $task-manager-warn
+);
+$task-manager-dark-theme: mat-dark-theme(
+  $task-manager-dark-theme-primary,
+  $task-manager-dark-theme-accent,
+  $task-manager-warn
+);
+
+/* You can add global styles to this file, and also import other style files */
+$task-manager-brand-color: map-get($mat-green, 500);
+$task-manager-warn-color: map-get($mat-red, 500);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@mixin lab-app-theme($theme) {
+
+  @include angular-material-theme($theme);
+
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $accent: map-get($theme, accent);
+
+  background-color: map-get($background, background);
+
+  .lab-app-bg {
+    background-color: map-get($background, background);
+  }
+
+  .lab-app-foreground {
+    background-color: map-get($foreground, foreground);
+  }
+
+  .lab-brand-appearance {
+    background-color: $task-manager-brand-color;
+    color: #FFFFFF;
+  }
+
+  .lab-notice-appearance {
+    background-color: map-get($mat-orange, A400);
+  }
+
+  .lab-warn-appearance {
+    background-color: $task-manager-warn-color;
+    color: #FFFFFF;
+  }
+
+  .lab-text-xs {
+    font-size: 0.75rem;
+  }
+
+  .lab-text-md {
+    font-size: 1.25rem;
+  }
+
+  .lab-text-lg {
+    font-size: 1.5rem;
+  }
+
+  .lab-row-spacer {
+    flex: 1 1 auto;
+  }
+
+  .lab-no-padding {
+    padding: 0!important;
+  }
+
+  .lab-panel {
+
+    box-sizing: border-box;
+    padding: 16px;
+
+    &-rounded {
+      border-radius: 6px;
+    }
+
+  }
+
+  // Angular Material Component Styles Overridings
+  .mat-toolbar {
+    background-color: transparent!important;
+  }
+
+}
+
+.lab-app-light-theme {
+  @include lab-app-theme($task-manager-light-theme);
+}
+
+.lab-app-dark-theme {
+  @include lab-app-theme($task-manager-dark-theme);
+}

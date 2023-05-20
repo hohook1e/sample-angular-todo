@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="lab-app-header-title lab-text-lg" routerLink="/">Таск-менеджер</div>
+    <div class="lab-row-spacer"></div>
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ icon$ | async }}</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

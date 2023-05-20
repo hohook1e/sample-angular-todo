@@ -1,0 +1,16 @@
+lab-app-root {
+
+  display: block;
+  height: 100%;
+
+  .lab-screen-content-max-w > * {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  router-outlet ~ * {
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+}

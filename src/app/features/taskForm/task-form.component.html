@@ -1,0 +1,46 @@
+<form [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>Заголовок</mat-label>
+    <input matInput formControlName="title" type="text" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Описание</mat-label>
+    <textarea matInput formControlName="description" type="text" required></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Срок</mat-label>
+    <input
+      matInput
+      formControlName="expires"
+      [matDatepicker]="picker"
+      required
+      (click)="picker.open()"
+    >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="lab-no-padding">
+      <button
+        mat-raised-button
+        (click)="cancel()"
+      >
+        Отмена
+      </button>
+      <div class="lab-row-spacer"></div>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="submit()"
+      >
+        Готово
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</form>

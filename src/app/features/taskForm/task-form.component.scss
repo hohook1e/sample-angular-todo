@@ -1,0 +1,15 @@
+:host {
+
+  display: block;
+  height: 100%;
+
+  form {
+    max-height: 480px;
+    width: 320px;
+  }
+
+  mat-form-field {
+    display: block;
+  }
+
+}

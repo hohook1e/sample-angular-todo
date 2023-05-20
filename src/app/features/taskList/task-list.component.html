@@ -1,0 +1,59 @@
+<section>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="lab-no-padding">
+      <div class="lab-text-md">Список задач</div>
+      <div class="lab-row-spacer"></div>
+      <button mat-raised-button color="primary" (click)="new()">Добавить</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-container *ngIf="tasks$ | labLoader | async as data">
+
+    <mat-nav-list
+      *ngIf="data.value as tasks"
+      [disableRipple]="true"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+    >
+      <mat-list-item
+        *ngFor="let task of tasks; trackBy: identify"
+        cdkDrag
+        [ngClass]="task.getClass()"
+        [routerLink]="['task', task.id]"
+        class="lab-panel-rounded mat-elevation-z2"
+      >
+        <div mat-line>{{ task.getTitle() }}</div>
+        <div mat-line>до {{ task.getTsExpires() | date: 'medium' }}</div>
+        <button
+          mat-icon-button
+          matTooltip="Редактировать"
+          (click)="$event.stopPropagation(); edit(task)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Закрыть"
+          (click)="$event.stopPropagation(); close(task)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <ng-container *ngIf="data.empty as empty">
+      Здесь пока ничего нет
+    </ng-container>
+
+    <ng-container *ngIf="data.loading as loading">
+      Загрузка...
+    </ng-container>
+
+    <ng-container *ngIf="data.error as error">
+      {{ error }}
+    </ng-container>
+
+  </ng-container>
+
+</section>
